@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FB SHARE BX</string>
-    <string name="app_tagline">Boost your share count effortlessly</string>
+    <string name="app_tagline">Share booster application</string>
     <string name="hint_cookie">Facebook Cookie</string>
     <string name="hint_link">Post Link</string>
     <string name="hint_limit">Share Limit (e.g. 1000)</string>
