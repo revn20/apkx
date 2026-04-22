@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
     private void applySuccess(int httpCode, Integer count, String limit, String detail) {
         resultIcon.setImageResource(R.drawable.ic_check_circle);
         resultTitle.setText("Sharing Started");
-        resultSubtitle.setText("Your job is now running on the server");
+        resultSubtitle.setText("Your share request was accepted");
         resultBadge.setText("Success");
         resultBadge.setBackgroundResource(R.drawable.bg_pill_success);
         resultBadge.setTextColor(0xFF16A34A);
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(detail) && !looksLikeJson(detail)) {
             msg = capitalize(detail.trim());
         } else if (count != null) {
-            msg = "Your post is now being shared " + count + " times. You can close the app, the job will keep running on the server.";
+            msg = "Your post is now being shared " + count + " times. The shares will appear on your post in a few moments.";
         } else {
             msg = "Your share request has been accepted. The shares will appear on your post in a few moments.";
         }

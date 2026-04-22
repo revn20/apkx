@@ -146,18 +146,14 @@ public class InfoActivity extends AppCompatActivity {
         hero.addView(subtitle("A clean, focused toolkit for boosting your post shares."));
         c.addView(hero);
 
-        c.addView(row(R.drawable.ic_rocket,    "Auto Sharing",
-                "Send hundreds of shares with a single tap, powered by the Vern API."));
+        c.addView(row(R.drawable.ic_share,     "Auto Sharing",
+                "Send hundreds of shares with a single tap, powered by FB Share BX."));
         c.addView(row(R.drawable.ic_tune,      "Custom Limit",
                 "Choose any share count you want, from a few to several thousand."));
-        c.addView(row(R.drawable.ic_moon,      "Light and Dark Mode",
-                "Flip the switch in the menu and the whole app changes instantly."));
         c.addView(row(R.drawable.ic_refresh,   "Automatic Updates",
                 "The app checks GitHub on launch and prompts you when a new build is ready."));
         c.addView(row(R.drawable.ic_clipboard, "Readable Results",
                 "Responses are parsed into a friendly card with status, count, and message."));
-        c.addView(row(R.drawable.ic_save,      "Saved Preferences",
-                "Your theme choice is remembered between launches."));
         c.addView(row(R.drawable.ic_shield,    "Private by Default",
                 "Nothing leaves your device except the request you send to the API."));
     }
@@ -236,7 +232,7 @@ public class InfoActivity extends AppCompatActivity {
         c.addView(hero);
 
         c.addView(row(R.drawable.ic_book,    "About",
-                "FB SHARE BX is a clean, modern Android client for the vern-rest-api auto share endpoint."));
+                "FB SHARE BX is a clean, modern Android app for auto sharing your Facebook posts."));
         c.addView(row(R.drawable.ic_balance, "License",
                 "Provided as is for educational purposes. Use responsibly."));
         c.addView(row(R.drawable.ic_chat,    "Support",
