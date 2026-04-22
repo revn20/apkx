@@ -35,14 +35,17 @@ public class UpdateChecker {
                 if (tag == null) tag = extractVersion(name);
                 if (tag == null) tag = "";
 
-                boolean isNewer = !tag.isEmpty() && !tag.equalsIgnoreCase(current);
+                final String finalTag = tag;
+                final String finalCurrent = current;
+                final String finalHtml = html;
+                boolean isNewer = !finalTag.isEmpty() && !finalTag.equalsIgnoreCase(finalCurrent);
                 if (isNewer) {
                     new Handler(Looper.getMainLooper()).post(() ->
                         new AlertDialog.Builder(ctx)
                             .setTitle("Update Available")
-                            .setMessage("A new version (v" + tag + ") of FB SHARE BX is ready.\n\nYou are currently on v" + current + ".\n\nDownload now to get the latest features and fixes.")
+                            .setMessage("A new version (v" + finalTag + ") of FB SHARE BX is ready.\n\nYou are currently on v" + finalCurrent + ".\n\nDownload now to get the latest features and fixes.")
                             .setPositiveButton("Download Now", (d, w) -> {
-                                ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(html)));
+                                ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(finalHtml)));
                             })
                             .setNegativeButton("Later", null)
                             .setCancelable(false)
