@@ -1,0 +1,80 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Release APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute version
+        id: ver
+        run: |
+          BUILD_NUMBER=${{ github.run_number }}
+          VERSION_NAME="1.0.${BUILD_NUMBER}"
+          echo "build_number=${BUILD_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "version_name=${VERSION_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug -PbuildNumber=${{ steps.ver.outputs.build_number }} -PappVersionName=${{ steps.ver.outputs.version_name }} --no-daemon --stacktrace
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease -PbuildNumber=${{ steps.ver.outputs.build_number }} -PappVersionName=${{ steps.ver.outputs.version_name }} --no-daemon --stacktrace
+
+      - name: Rename APKs
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/debug/app-debug.apk out/FB-SHARE-BX-debug.apk
+          cp app/build/outputs/apk/release/app-release*.apk out/FB-SHARE-BX-release.apk
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: FB-SHARE-BX-debug
+          path: out/FB-SHARE-BX-debug.apk
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: FB-SHARE-BX-release
+          path: out/FB-SHARE-BX-release.apk
+
+      - name: Create / Update "latest" Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: FB SHARE BX v${{ steps.ver.outputs.version_name }}
+          body: |
+            **FB SHARE BX v${{ steps.ver.outputs.version_name }}**
+
+            version=${{ steps.ver.outputs.version_name }}
+            build=${{ steps.ver.outputs.build_number }}
+
+            Automatic build from commit ${{ github.sha }}.
+            Install the release APK on Android (enable "Install unknown apps").
+          files: |
+            out/FB-SHARE-BX-debug.apk
+            out/FB-SHARE-BX-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
