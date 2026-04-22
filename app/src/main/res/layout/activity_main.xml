@@ -252,6 +252,23 @@
                             android:lineSpacingExtra="2dp"
                             android:fontFamily="sans-serif"
                             android:textColor="?attr/colorOnSurface" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCopyResult"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_marginTop="14dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:text="Copy Result"
+                            android:textSize="13sp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textAllCaps="false"
+                            android:letterSpacing="0.04"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_copy"
+                            app:iconSize="18dp"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp" />
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>

@@ -1,5 +1,8 @@
 package com.fbsharebx.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private View resultCard;
     private ImageView resultIcon;
     private TextView resultTitle, resultSubtitle, resultBadge, resultMessage;
+    private Button btnCopyResult;
     private TextView statVersion;
     private LinearLayout metricsRow;
 
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         resultMessage = findViewById(R.id.resultMessage);
         metricsRow = findViewById(R.id.metricsRow);
         statVersion = findViewById(R.id.statVersion);
+        btnCopyResult = findViewById(R.id.btnCopyResult);
+        btnCopyResult.setOnClickListener(v -> copyResultToClipboard());
 
         statVersion.setText("FB SHARE BX v" + BuildConfig.VERSION_NAME.replace("-debug", ""));
 
@@ -96,6 +102,36 @@ public class MainActivity extends AppCompatActivity {
         refreshStats();
         new Handler(Looper.getMainLooper()).postDelayed(
                 () -> UpdateChecker.check(this, false), 1500);
+    }
+
+    private void copyResultToClipboard() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(resultTitle.getText()).append("\n");
+        sb.append(resultSubtitle.getText()).append("\n");
+        sb.append("Status: ").append(resultBadge.getText()).append("\n");
+        for (int i = 0; i < metricsRow.getChildCount(); i++) {
+            View child = metricsRow.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) child;
+                String label = "", value = "";
+                for (int j = 0; j < vg.getChildCount(); j++) {
+                    View tv = vg.getChildAt(j);
+                    if (tv instanceof TextView) {
+                        if (value.isEmpty()) value = ((TextView) tv).getText().toString();
+                        else label = ((TextView) tv).getText().toString();
+                    }
+                }
+                if (!label.isEmpty()) sb.append(label).append(": ").append(value).append("\n");
+            }
+        }
+        if (!TextUtils.isEmpty(resultMessage.getText())) {
+            sb.append("\n").append(resultMessage.getText());
+        }
+        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        if (cm != null) {
+            cm.setPrimaryClip(ClipData.newPlainText("FB Share BX Result", sb.toString()));
+            Toast.makeText(this, "Result copied to clipboard", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void refreshStats() {
