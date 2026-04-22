@@ -151,7 +151,7 @@ public class InfoActivity extends AppCompatActivity {
         c.addView(row(R.drawable.ic_tune,      "Custom Limit",
                 "Choose any share count you want, from a few to several thousand."));
         c.addView(row(R.drawable.ic_refresh,   "Automatic Updates",
-                "The app checks GitHub on launch and prompts you when a new build is ready."));
+                "We will notiify y'all when there's any update."));
         c.addView(row(R.drawable.ic_clipboard, "Readable Results",
                 "Responses are parsed into a friendly card with status, count, and message."));
         c.addView(row(R.drawable.ic_shield,    "Private by Default",
@@ -234,7 +234,7 @@ public class InfoActivity extends AppCompatActivity {
         c.addView(row(R.drawable.ic_book,    "About",
                 "FB SHARE BX is a clean, modern Android app for auto sharing your Facebook posts."));
         c.addView(row(R.drawable.ic_balance, "License",
-                "Provided as is for educational purposes. Use responsibly."));
+                "Don’t remove the owner credits. Use responsibly."));
         c.addView(row(R.drawable.ic_chat,    "Support",
                 "Reach the developer through the Facebook profile listed on the Developer page."));
         c.addView(row(R.drawable.ic_refresh, "Auto Update",
