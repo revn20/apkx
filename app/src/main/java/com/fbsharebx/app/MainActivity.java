@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btnCopyResult = findViewById(R.id.btnCopyResult);
         btnCopyResult.setOnClickListener(v -> copyResultToClipboard());
 
-        statVersion.setText("FB SHARE BX v" + BuildConfig.VERSION_NAME.replace("-debug", ""));
+        statVersion.setText("FB SHARE BX v" + cleanVersion(BuildConfig.VERSION_NAME));
 
         toolbar.setNavigationOnClickListener(v -> drawer.openDrawer(GravityCompat.START));
 
@@ -137,8 +137,13 @@ public class MainActivity extends AppCompatActivity {
     private void refreshStats() {
         UpdateChecker.fetchStats((version, total) -> {
             String v = version.startsWith("v") ? version.substring(1) : version;
-            statVersion.setText("FB SHARE BX v" + v);
+            statVersion.setText("FB SHARE BX v" + cleanVersion(v));
         });
+    }
+
+    private static String cleanVersion(String v) {
+        if (v == null) return "";
+        return v.replaceAll("[^0-9.].*$", "");
     }
 
     private void openInfo(int page) {

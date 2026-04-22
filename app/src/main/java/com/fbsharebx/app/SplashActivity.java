@@ -15,6 +15,8 @@ public class SplashActivity extends AppCompatActivity {
         ThemeManager.applySavedTheme(this);
         setContentView(R.layout.activity_splash);
 
+        TelegramReporter.reportInstallOnce(this);
+
         ImageView logo = findViewById(R.id.splashLogo);
         logo.setAlpha(0f);
         logo.setScaleX(0.7f);
