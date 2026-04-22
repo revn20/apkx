@@ -45,96 +45,6 @@
                     android:paddingTop="14dp"
                     android:paddingBottom="18dp">
 
-                    <!-- Stats row: total downloads + version -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="14dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/bg_card"
-                            android:padding="12dp"
-                            android:layout_marginEnd="6dp"
-                            android:elevation="2dp">
-
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:src="@drawable/ic_download" />
-
-                            <LinearLayout
-                                android:layout_marginStart="10dp"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/statDownloads"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="—"
-                                    android:textSize="15sp"
-                                    android:fontFamily="sans-serif-black"
-                                    android:textColor="?attr/colorOnSurface" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Downloads"
-                                    android:textSize="10sp"
-                                    android:textColor="?attr/colorOnSurfaceVariant" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:background="@drawable/bg_card"
-                            android:padding="12dp"
-                            android:layout_marginStart="6dp"
-                            android:elevation="2dp">
-
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:src="@drawable/ic_sparkle" />
-
-                            <LinearLayout
-                                android:layout_marginStart="10dp"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/statVersion"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="v1.0.0"
-                                    android:textSize="15sp"
-                                    android:fontFamily="sans-serif-black"
-                                    android:textColor="?attr/colorOnSurface" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Latest version"
-                                    android:textSize="10sp"
-                                    android:textColor="?attr/colorOnSurfaceVariant" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-
                     <!-- Share panel -->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -149,11 +59,10 @@
                         android:gravity="center_horizontal">
 
                         <ImageView
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:src="@drawable/ic_rocket"
-                            android:background="@drawable/bg_metric"
-                            android:padding="9dp" />
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:src="@mipmap/ic_launcher"
+                            android:contentDescription="@string/app_name" />
 
                         <TextView
                             android:layout_marginTop="12dp"
@@ -237,7 +146,7 @@
                             android:letterSpacing="0.04"
                             app:cornerRadius="14dp"
                             app:backgroundTint="@color/brand_primary"
-                            app:icon="@drawable/ic_rocket"
+                            app:icon="@drawable/ic_share"
                             app:iconSize="18dp"
                             app:iconTint="#FFFFFF"
                             app:iconGravity="textStart" />
@@ -248,6 +157,18 @@
                             android:layout_marginTop="10dp"
                             android:layout_width="26dp"
                             android:layout_height="26dp" />
+
+                        <TextView
+                            android:id="@+id/statVersion"
+                            android:layout_marginTop="18dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FB SHARE BX v1.0.0"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.05"
+                            android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
 
                     <!-- Result card -->
@@ -339,10 +260,13 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
-        android:layout_width="wrap_content"
+        android:layout_width="288dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:itemIconPadding="16dp"
+        app:itemHorizontalPadding="20dp"
+        app:itemIconSize="24dp"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

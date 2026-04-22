@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private View resultCard;
     private ImageView resultIcon;
     private TextView resultTitle, resultSubtitle, resultBadge, resultMessage;
-    private TextView statDownloads, statVersion;
+    private TextView statVersion;
     private LinearLayout metricsRow;
 
     @Override
@@ -62,10 +62,9 @@ public class MainActivity extends AppCompatActivity {
         resultBadge = findViewById(R.id.resultBadge);
         resultMessage = findViewById(R.id.resultMessage);
         metricsRow = findViewById(R.id.metricsRow);
-        statDownloads = findViewById(R.id.statDownloads);
         statVersion = findViewById(R.id.statVersion);
 
-        statVersion.setText("v" + BuildConfig.VERSION_NAME);
+        statVersion.setText("FB SHARE BX v" + BuildConfig.VERSION_NAME.replace("-debug", ""));
 
         toolbar.setNavigationOnClickListener(v -> drawer.openDrawer(GravityCompat.START));
 
@@ -101,19 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshStats() {
         UpdateChecker.fetchStats((version, total) -> {
-            statVersion.setText(version);
-            statDownloads.setText(formatNumber(total));
+            String v = version.startsWith("v") ? version.substring(1) : version;
+            statVersion.setText("FB SHARE BX v" + v);
         });
-    }
-
-    private static String formatNumber(long n) {
-        if (n < 1000) return String.valueOf(n);
-        if (n < 1_000_000) {
-            double k = n / 1000.0;
-            return (k >= 10 ? String.valueOf((int) k) : String.format("%.1f", k)) + "K";
-        }
-        double m = n / 1_000_000.0;
-        return (m >= 10 ? String.valueOf((int) m) : String.format("%.1f", m)) + "M";
     }
 
     private void openInfo(int page) {
